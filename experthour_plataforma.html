@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExpertHour — Consultorías</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8;
+  --ink: #1A1612;
+  --ink-light: #4A4540;
+  --ink-faint: #8A8580;
+  --gold: #B8A06A;
+  --gold-light: #D4BC8A;
+  --border: #E0D8CC;
+  --white: #FFFFFF;
+  --error: #C0392B;
+  --success: #27AE60;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--ink);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.logo span { color: var(--gold); }
+
+nav { display: flex; align-items: center; gap: 24px; }
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--white); }
+
+.btn-header {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-header:hover { background: var(--gold); color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  padding: 80px 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-light);
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+.hero-card:nth-child(2) { margin-top: 24px; }
+.hero-card:nth-child(3) { margin-top: -24px; }
+
+.card-area {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.card-exp {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.card-price {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── FILTERS ── */
+.filters-section {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+}
+
+.filters-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 56px;
+  overflow-x: auto;
+}
+
+.filter-btn {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0 20px;
+  height: 56px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover { color: var(--ink); }
+.filter-btn.active { color: var(--ink); border-bottom-color: var(--gold); font-weight: 500; }
+
+.filter-divider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+/* ── DIRECTORY ── */
+.directory {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+
+.directory-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.directory-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.directory-count {
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+.experts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ── EXPERT CARD ── */
+.expert-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.expert-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.expert-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+}
+
+.expert-card-body { padding: 24px; }
+
+.expert-area {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.expert-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.expert-exp {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+
+.expert-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expert-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.expert-price {
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+.expert-price strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.btn-agendar {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-agendar:hover { background: var(--gold); }
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,22,18,0.7);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--white);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  background: var(--ink);
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.modal-expert-info { flex: 1; }
+
+.modal-area {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.modal-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.modal-exp {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  margin-left: 16px;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--white); }
+
+.modal-body { padding: 32px; }
+
+.modal-section-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 16px;
+}
+
+/* Sesión selector */
+.session-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.session-opt {
+  border: 1px solid var(--border);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.session-opt:hover { border-color: var(--gold); }
+.session-opt.selected { border-color: var(--ink); background: var(--cream); }
+
+.session-opt.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 8px; right: 10px;
+  font-size: 12px;
+  color: var(--gold);
+}
+
+.session-duration {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.session-price {
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+/* Form */
+.form-group { margin-bottom: 20px; }
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+
+.form-input:focus,
+.form-textarea:focus { border-color: var(--ink); }
+
+.form-textarea { min-height: 120px; }
+
+.form-hint {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  padding: 24px 32px 32px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-submit {
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover { background: var(--gold); }
+.btn-submit:disabled { background: var(--ink-faint); cursor: not-allowed; }
+
+.modal-disclaimer {
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ── SUCCESS STATE ── */
+.success-state {
+  display: none;
+  padding: 48px 32px;
+  text-align: center;
+}
+
+.success-state.active { display: block; }
+
+.success-icon {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 22px;
+}
+
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.success-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-light);
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0 auto 28px;
+}
+
+.success-steps {
+  text-align: left;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.success-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+.success-step:last-child { margin-bottom: 0; }
+
+.step-num {
+  width: 20px;
+  height: 20px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  display: none;
+}
+
+.empty-state.active { display: block; }
+
+.empty-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: var(--ink-faint);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 40px;
+  margin-top: 80px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.08em;
+}
+
+.footer-logo span { color: var(--gold); }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  header { padding: 0 20px; }
+  .hero { grid-template-columns: 1fr; padding: 40px 20px; gap: 32px; }
+  .hero-visual { display: none; }
+  .hero-title { font-size: 36px; }
+  .filters-section { padding: 0 20px; }
+  .directory { padding: 32px 20px; }
+  .experts-grid { grid-template-columns: 1fr; }
+  .modal-body { padding: 24px; }
+  .modal-footer { padding: 20px 24px 28px; }
+  footer { padding: 24px 20px; }
+  .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">Expert<span>Hour</span></a>
+  <nav>
+    <a href="#" class="nav-link">Cómo funciona</a>
+    <a href="#" class="nav-link">Áreas</a>
+    <a href="https://aguileracisf.typeform.com/to/cfr8AP9G" class="btn-header" target="_blank">Soy experto</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Consultorías on-demand</p>
+    <h1 class="hero-title">Resuelve tu duda<br>con <em>quien ya lo</em><br>vivió.</h1>
+    <p class="hero-desc">Sesiones de 30 minutos o 1 hora con expertos verificados en jurídico, finanzas, marketing y emprendimiento. Sin burocracia, sin costos adicionales.</p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">30'</span>
+        <span class="stat-label">Mínimo por sesión</span>
+      </div>
+      <div>
+        <span class="stat-num">4</span>
+        <span class="stat-label">Áreas de expertise</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Expertos verificados</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-area">Jurídico</div>
+      <div class="card-name">Laura Q.</div>
+      <div class="card-exp">8 años de experiencia</div>
+      <div class="card-price">Desde $100.000 COP</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-area">Finanzas</div>
+      <div class="card-name">Carlos M.</div>
+      <div class="card-exp">12 años de experiencia</div>
+      <div class="card-price">Desde $80.000 COP</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-area">Marketing</div>
+      <div class="card-name">Andrea P.</div>
+      <div class="card-exp">6 años de experiencia</div>
+      <div class="card-price">Desde $70.000 COP</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-area">Emprendimiento</div>
+      <div class="card-name">Juan S.</div>
+      <div class="card-exp">10 años de experiencia</div>
+      <div class="card-price">Desde $90.000 COP</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters-section">
+  <div class="filters-inner">
+    <button class="filter-btn active" onclick="filterExperts('todos', this)">Todos los expertos</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" onclick="filterExperts('Jurídico', this)">Jurídico</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" onclick="filterExperts('Finanzas', this)">Finanzas</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" onclick="filterExperts('Marketing digital', this)">Marketing digital</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" onclick="filterExperts('Emprendimiento', this)">Emprendimiento</button>
+  </div>
+</div>
+
+<!-- DIRECTORY -->
+<section class="directory">
+  <div class="directory-header">
+    <h2 class="directory-title">Expertos disponibles</h2>
+    <span class="directory-count" id="count">1 experto</span>
+  </div>
+  <div class="experts-grid" id="expertsGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <p class="empty-title">No hay expertos en esta área aún</p>
+    <p class="empty-desc">Estamos incorporando más expertos. Vuelve pronto.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Expert<span>Hour</span> · Consultorías</div>
+    <p class="footer-copy">© 2025 ExpertHour · Bogotá, Colombia · experthour.co</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-expert-info">
+        <div class="modal-area" id="modalArea"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-exp" id="modalExp"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- FORM STATE -->
+    <div id="formState">
+      <div class="modal-body">
+        <p class="modal-section-title">Elige tu tipo de sesión</p>
+        <div class="session-options">
+          <div class="session-opt selected" id="opt30" onclick="selectSession(30)">
+            <div class="session-duration">30 min</div>
+            <div class="session-price" id="price30"></div>
+          </div>
+          <div class="session-opt" id="opt60" onclick="selectSession(60)">
+            <div class="session-duration">60 min</div>
+            <div class="session-price" id="price60"></div>
+          </div>
+        </div>
+
+        <p class="modal-section-title">Cuéntale al experto tu consulta</p>
+
+        <div class="form-group">
+          <label class="form-label">Tu nombre completo *</label>
+          <input type="text" class="form-input" id="clientName" placeholder="Ej. María Rodríguez">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tu correo electrónico *</label>
+          <input type="email" class="form-input" id="clientEmail" placeholder="tu@correo.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Describe tu consulta *</label>
+          <textarea class="form-textarea" id="consultaDesc" placeholder="Cuéntale al experto qué necesitas resolver. Sé específico — esto le ayudará a prepararse y decidir si puede ayudarte."></textarea>
+          <p class="form-hint">El experto revisará tu consulta antes de confirmar la sesión. Te contactaremos en menos de 24 horas.</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-submit" id="submitBtn" onclick="submitRequest()">Enviar solicitud</button>
+        <p class="modal-disclaimer">Al enviar, aceptas que el experto revise tu consulta antes de confirmar. El pago se realiza solo cuando la sesión es aceptada.</p>
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">✓</div>
+      <h3 class="success-title">¡Solicitud enviada!</h3>
+      <p class="success-desc">Tu consulta fue enviada a <strong id="successExpert"></strong>. Ahora el proceso es simple:</p>
+      <div class="success-steps">
+        <div class="success-step">
+          <div class="step-num">1</div>
+          <div>El experto revisa tu consulta y decide si puede ayudarte.</div>
+        </div>
+        <div class="success-step">
+          <div class="step-num">2</div>
+          <div>Si acepta, recibirás un correo con el link de pago y el link para agendar la sesión.</div>
+        </div>
+        <div class="success-step">
+          <div class="step-num">3</div>
+          <div>Pagas, agendas y tienes tu sesión. Sin más pasos.</div>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="closeModal()" style="max-width: 240px; margin: 0 auto; display: block;">Entendido</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const experts = [
+  {
+    id: 1,
+    name: "Laura Quintana Suarez",
+    area: "Jurídico",
+    experiencia: "5 a 10 años",
+    descripcion: "Abogada especialista en derecho laboral y corporativo. Asesoro en constitución de empresas, contratos, despidos, herencias y consultas jurídicas del día a día.",
+    tarifa30: 100000,
+    tarifa60: 180000,
+    initials: "LQ",
+    activo: true
+  }
+];
+
+let selectedSession = 30;
+let currentExpert = null;
+
+// ── RENDER EXPERTS ──
+function formatCOP(n) {
+  return '$' + n.toLocaleString('es-CO') + ' COP';
+}
+
+function renderExperts(list) {
+  const grid = document.getElementById('expertsGrid');
+  const empty = document.getElementById('emptyState');
+  const count = document.getElementById('count');
+
+  const active = list.filter(e => e.activo);
+  count.textContent = active.length + (active.length === 1 ? ' experto' : ' expertos');
+
+  if (active.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.add('active');
+    return;
+  }
+
+  empty.classList.remove('active');
+  grid.innerHTML = active.map(e => `
+    <div class="expert-card" onclick="openModal(${e.id})">
+      <div class="expert-card-img">${e.initials}</div>
+      <div class="expert-card-body">
+        <div class="expert-area">${e.area}</div>
+        <div class="expert-name">${e.name}</div>
+        <div class="expert-exp">${e.experiencia} de experiencia</div>
+        <div class="expert-desc">${e.descripcion}</div>
+        <div class="expert-footer">
+          <div class="expert-price">Desde <strong>${formatCOP(e.tarifa30)}</strong></div>
+          <button class="btn-agendar" onclick="event.stopPropagation(); openModal(${e.id})">Agendar sesión</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterExperts(area, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = area === 'todos' ? experts : experts.filter(e => e.area === area);
+  renderExperts(filtered);
+}
+
+// ── MODAL ──
+function openModal(id) {
+  currentExpert = experts.find(e => e.id === id);
+  if (!currentExpert) return;
+
+  document.getElementById('modalArea').textContent = currentExpert.area;
+  document.getElementById('modalName').textContent = currentExpert.name;
+  document.getElementById('modalExp').textContent = currentExpert.experiencia + ' de experiencia';
+  document.getElementById('price30').textContent = formatCOP(currentExpert.tarifa30);
+  document.getElementById('price60').textContent = formatCOP(currentExpert.tarifa60);
+
+  selectedSession = 30;
+  document.getElementById('opt30').classList.add('selected');
+  document.getElementById('opt60').classList.remove('selected');
+
+  document.getElementById('clientName').value = '';
+  document.getElementById('clientEmail').value = '';
+  document.getElementById('consultaDesc').value = '';
+
+  document.getElementById('formState').style.display = 'block';
+  document.getElementById('successState').classList.remove('active');
+
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function selectSession(mins) {
+  selectedSession = mins;
+  document.getElementById('opt30').classList.toggle('selected', mins === 30);
+  document.getElementById('opt60').classList.toggle('selected', mins === 60);
+}
+
+function submitRequest() {
+  const name = document.getElementById('clientName').value.trim();
+  const email = document.getElementById('clientEmail').value.trim();
+  const desc = document.getElementById('consultaDesc').value.trim();
+
+  if (!name || !email || !desc) {
+    alert('Por favor completa todos los campos antes de enviar.');
+    return;
+  }
+
+  if (!email.includes('@')) {
+    alert('Por favor ingresa un correo electrónico válido.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  // Envío a Formspree → llega a expertos@experthour.co
+  fetch("https://formspree.io/f/mjglbaoz", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      experto: currentExpert.name,
+      area: currentExpert.area,
+      sesion: selectedSession + " minutos",
+      tarifa: formatCOP(selectedSession === 30 ? currentExpert.tarifa30 : currentExpert.tarifa60),
+      cliente_nombre: name,
+      cliente_email: email,
+      consulta: desc,
+      _subject: "Nueva solicitud de sesión — ExpertHour"
+    })
+  })
+  .then(() => {
+    document.getElementById("formState").style.display = "none";
+    document.getElementById("successState").classList.add("active");
+    document.getElementById("successExpert").textContent = currentExpert.name;
+    btn.disabled = false;
+    btn.textContent = "Enviar solicitud";
+  })
+  .catch(() => {
+    document.getElementById("formState").style.display = "none";
+    document.getElementById("successState").classList.add("active");
+    document.getElementById("successExpert").textContent = currentExpert.name;
+    btn.disabled = false;
+    btn.textContent = "Enviar solicitud";
+  });
+}
+
+// ── INIT ──
+renderExperts(experts);
+</script>
+</body>
+</html>
