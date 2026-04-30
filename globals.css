@@ -1,0 +1,14 @@
+import './globals.css'
+
+export const metadata = {
+  title: 'ExpertHour — Consultorías',
+  description: 'Asesoría legal, financiera o de negocio para personas y empresas — sin enredos, sin intermediarios y sin costos absurdos.',
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="es">
+      <body>{children}</body>
+    </html>
+  )
+}
