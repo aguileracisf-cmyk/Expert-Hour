@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { expertos } from '@/lib/expertos'
+import { createClient } from '@/lib/supabase'
 
 const AREAS = ['Todos', 'Jurídico', 'Finanzas', 'Marketing digital', 'Emprendimiento']
 
@@ -14,12 +15,24 @@ export default function ExpertosPage() {
   const [modalExperto, setModalExperto] = useState(null)
   const [sesion, setSesion] = useState(30)
   const [form, setForm] = useState({ nombre: '', email: '', consulta: '' })
-  const [step, setStep] = useState('form') // form | success
+  const [step, setStep] = useState('form')
   const [loading, setLoading] = useState(false)
+  const sb = createClient()
 
   const filtrados = area === 'Todos' ? expertos.filter(e => e.activo) : expertos.filter(e => e.activo && e.area === area)
 
-  const openModal = (e) => { setModalExperto(e); setSesion(30); setForm({ nombre: '', email: '', consulta: '' }); setStep('form') }
+  const openModal = async (e) => {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) {
+      window.location.href = '/login'
+      return
+    }
+    setModalExperto(e)
+    setSesion(30)
+    setForm({ nombre: '', email: '', consulta: '' })
+    setStep('form')
+  }
+
   const closeModal = () => setModalExperto(null)
 
   const submitRequest = async () => {
@@ -45,7 +58,6 @@ export default function ExpertosPage() {
 
   return (
     <div style={{ fontFamily: 'DM Sans, sans-serif', background: 'var(--cream)', minHeight: '100vh' }}>
-      {/* HEADER */}
       <header style={{ background: 'var(--ink)', padding: '0 40px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100 }}>
         <Link href="/" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: 500, color: '#fff', letterSpacing: '0.08em', textDecoration: 'none' }}>
           Expert<span style={{ color: 'var(--gold)' }}>Hour</span>
@@ -56,7 +68,6 @@ export default function ExpertosPage() {
         </nav>
       </header>
 
-      {/* FILTERS */}
       <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px', display: 'flex', alignItems: 'center', height: '56px', gap: '4px', overflowX: 'auto' }}>
           {AREAS.map((a, i) => (
@@ -70,7 +81,6 @@ export default function ExpertosPage() {
         </div>
       </div>
 
-      {/* DIRECTORY */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 40px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
           <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: 400 }}>Expertos disponibles</h2>
@@ -113,7 +123,6 @@ export default function ExpertosPage() {
         )}
       </section>
 
-      {/* FOOTER */}
       <footer style={{ background: 'var(--ink)', padding: '40px', marginTop: '40px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '18px', color: '#fff' }}>Expert<span style={{ color: 'var(--gold)' }}>Hour</span> · Consultorías</div>
@@ -121,11 +130,9 @@ export default function ExpertosPage() {
         </div>
       </footer>
 
-      {/* MODAL */}
       {modalExperto && (
         <div onClick={(e) => e.target === e.currentTarget && closeModal()} style={{ position: 'fixed', inset: 0, background: 'rgba(26,22,18,0.7)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', backdropFilter: 'blur(4px)' }}>
           <div style={{ background: 'var(--white)', width: '100%', maxWidth: '560px', maxHeight: '90vh', overflowY: 'auto' }}>
-            {/* Modal header */}
             <div style={{ background: 'var(--ink)', padding: '28px 32px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ fontSize: '10px', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '6px' }}>{modalExperto.area}</div>
