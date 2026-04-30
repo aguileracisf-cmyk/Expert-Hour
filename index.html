@@ -714,9 +714,9 @@ footer {
   <a href="#" class="logo">Expert<span>Hour</span></a>
   <nav>
     <a href="#como-funciona" class="nav-link">Cómo funciona</a>
-    <a href="#" class="nav-link">Áreas</a>
+    <a href="#areas" class="nav-link">Áreas</a>
     <a href="https://aguileracisf.typeform.com/to/cfr8AP9G" class="btn-header" target="_blank">Quiero ser experto</a>
-    <a href="/expertos-area.html" class="btn-header" style="margin-left:8px;background:var(--gold);color:var(--ink);border-color:var(--gold)">Soy experto</a>
+    <a href="#" class="btn-header" style="margin-left:8px;background:var(--gold);color:var(--ink);border-color:var(--gold)">Ingresar</a>
   </nav>
 </header>
 
@@ -1066,6 +1066,18 @@ function submitRequest() {
     btn.textContent = "Enviar solicitud";
   });
 }
+
+
+function toggleDropdown() {
+  const menu = document.getElementById('dropdown-menu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.dropdown')) {
+    const menu = document.getElementById('dropdown-menu');
+    if (menu) menu.style.display = 'none';
+  }
+});
 
 // ── INIT ──
 renderExperts(experts);
