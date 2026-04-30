@@ -892,7 +892,7 @@ const experts = [
     tarifa30: 100000,
     tarifa60: 180000,
     initials: "LQ",
-    foto: "https://raw.githubusercontent.com/aguileracisf-cmyk/Expert-Hour/main/lauraquintanasua.jpg",
+    foto: "https://raw.githubusercontent.com/aguileracisf-cmyk/Expert-Hour/main/lauraquintasua.jpg",
     activo: true
   }
 ];
@@ -922,7 +922,7 @@ function renderExperts(list) {
   empty.classList.remove('active');
   grid.innerHTML = active.map(e => `
     <div class="expert-card" onclick="openModal(${e.id})">
-      <div class="expert-card-img">${e.initials}</div>
+      <div class="expert-card-img" style="padding:0;overflow:hidden">${e.foto ? `<img src="${e.foto}" style="width:100%;height:200px;object-fit:cover;display:block">` : `<span style="display:flex;align-items:center;justify-content:center;height:200px;font-family:'Cormorant Garamond',serif;font-size:48px;color:#B8A06A">${e.initials}</span>`}</div>
       <div class="expert-card-body">
         <div class="expert-area">${e.area}</div>
         <div class="expert-name">${e.name}</div>
